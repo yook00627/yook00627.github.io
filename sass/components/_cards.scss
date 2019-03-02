@@ -1,0 +1,203 @@
+//Flipping cards
+.card {
+  //Functionality of the cards
+  perspective: 150rem; //for applying 3dimention
+  position: relative;
+  height: 52rem;
+
+  //each side of the card
+  &__side {
+    height: 52rem; //same height as parrent to fill up
+    transition: all 0.8s ease;
+    font-size: 2rem;
+
+    //setting position of the card
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    backface-visibility: hidden; //hide backside of the card
+    border-radius: 3px;
+    overflow: hidden; //for radius to apply correctly
+
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+    //setting front side of the card
+    &--front {
+      background-color: $color-white;
+    }
+
+    //setting back side of the card
+    &--back {
+      transform: rotateY(180deg);
+
+      &-1 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        );
+      }
+      &-2 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        );
+      }
+      &-3 {
+        background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        );
+      }
+    }
+  }
+
+  //setting rotate for front
+  &:hover &__side--front {
+    transform: rotateY(-180deg);
+  }
+
+  //rotate for back
+  &:hover &__side--back {
+    transform: rotateY(0);
+  }
+
+  //Front styeling
+  &__picture {
+    background-size: cover;
+    height: 23rem;
+    background-blend-mode: screen; //to apply gradient to image
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    //clip-path breaking border radius but no need anymore
+    /*
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    */
+
+    &--1 {
+      background-image: url(../img/nat-5.jpg),
+        linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        );
+    }
+    &--2 {
+      background-image: url(../img/nat-6.jpg),
+        linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        );
+    }
+    &--3 {
+      background-image: url(../img/nat-7.jpg),
+        linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        );
+    }
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    color: $color-white;
+    text-align: right;
+    width: 75%;
+
+    //setting postiiton of heading of card
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+  }
+
+  //headding span settings
+  &__heading-span {
+    padding: 1rem 1.5rem;
+
+    //to make the box for multiple line its own box
+    //must use webkit because not yet supported
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+
+    &--1 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-secondary-light, 0.85),
+        rgba($color-secondary-dark, 0.85)
+      );
+    }
+    &--2 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.85),
+        rgba($color-primary-dark, 0.85)
+      );
+    }
+    &--3 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-tertiary-light, 0.85),
+        rgba($color-tertiary-dark, 0.85)
+      );
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+
+    ul {
+      list-style: none;
+      width: 80%;
+      margin: 0 auto;
+
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        //drawing line for each element except last one
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+      }
+    }
+  }
+
+  //Back Styling
+  &__cta {
+    position: absolute;
+
+    //centering
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 90%;
+    text-align: center;
+  }
+
+  &__price-box {
+    text-align: center;
+    color: $color-white;
+    margin-bottom: 8rem;
+  }
+
+  &__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  &__price-value {
+    font-size: 6rem;
+    font-weight: 100;
+  }
+}

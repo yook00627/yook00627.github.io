@@ -1,0 +1,97 @@
+//setting default typography for parent
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: $color-grey-dark;
+}
+
+//setting typography for first heading h1
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+
+  //for prevent shaking of animation
+  backface-visibility: hidden;
+
+  margin-bottom: 6rem;
+
+  //both main and sub is set to block to make text into block
+  &--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+
+    @include respond(phone) {
+      letter-spacing: 1rem;
+      font-size: 5rem;
+    }
+
+    //applying animation in detail
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    //if I want delay in animation or have multiple iteration
+    /*
+	  animation-delay: 3s;
+	  animation-iteration-count: 3;
+	  */
+  }
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+
+    //shorter version of applying animation
+    animation: moveInRight 1s ease-out;
+
+    @include respond(phone) {
+      letter-spacing: 0.5rem;
+    }
+  }
+}
+
+//setting typography for second heading h2
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  //this is to create a gradient on the text
+  display: inline-block;
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  background-clip: text; //added for compatability
+  -webkit-background-clip: text;
+  color: transparent;
+
+  letter-spacing: 2px;
+  transition: all 0.2s;
+
+  //for scewing the text when hover
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2);
+  }
+}
+
+//heading for samller h3
+.heading-tertiary {
+  font-size: $default-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+//typography for paragraphs
+.paragraph {
+  font-size: $default-font-size;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}

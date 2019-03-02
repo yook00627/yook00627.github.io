@@ -1,0 +1,109 @@
+//form for the booking section
+.form {
+  //adding margin except last group
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  //setting for input box
+  &__input {
+    //typography for the input box
+    font-size: 1.5rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba($color-white, 0.5);
+
+    border: none;
+    width: 90%;
+    display: block;
+    transition: all 0.5s;
+
+    border-bottom: 3px solid transparent; //for setting inital border on focus so it doesn't shift
+
+    //when selected show border on the bottom of the input box
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      border-bottom: 3px solid $color-primary;
+    }
+
+    //when input is invalid
+    &:focus:invalid {
+      border-bottom: 3px solid $color-secondary-dark;
+    }
+
+    //change color of text on the input placeholder
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark-2;
+    }
+  }
+
+  //label wiill show when after typing on input box
+  &__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 2rem;
+    margin-top: 0.7rem;
+    display: block;
+    transition: all 0.3s;
+  }
+
+  //sibling sector by using + meaning after and ~ is general selector
+  &__input:placeholder-shown + &__label {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+
+  //setting the radio selection box
+  &__radio-group {
+    width: 49%;
+    display: inline-block;
+  }
+
+  //to hide the default selection radio
+  &__radio-input {
+    display: none;
+  }
+
+  //set label for radio
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  //creating the button to replace default radio
+  &__radio-button {
+    height: 3rem;
+    width: 3rem;
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: -0.4rem;
+
+    //create the selected circle
+    &::after {
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      @include absCenter;
+      background-color: $color-primary;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+
+  //change betwene when each selection is selected
+  //this also connects the radio-input that is hidden
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
+}

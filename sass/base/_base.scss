@@ -1,0 +1,39 @@
+//This is the universal selector for creating a default for all the element
+*,
+*::after,
+*::before {
+  //margin and padding is set to 0 because default is not
+  margin: 0;
+  padding: 0;
+  //box sizing inherit from body
+  box-sizing: inherit;
+}
+
+//creating a root for rem reference
+html {
+  //default 16px convert to base 10
+  //defines 1 rem is
+  font-size: 62.5%; /*10px*/
+
+  @include respond(tab-land) {
+    font-size: 56.25%; //9px
+  }
+
+  @include respond(tab-port) {
+    font-size: 50%; //8px
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; //12px
+  }
+}
+
+//Main mody parent
+body {
+  box-sizing: border-box;
+  padding: 3rem;
+
+  @include respond(tab-port) {
+    padding: 0;
+  }
+}
