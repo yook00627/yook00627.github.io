@@ -1,546 +1,716 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kevin Yook — Developer Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/icon-font.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+  :root {
+    --bg: #0e0e11;
+    --surface: #17171b;
+    --surface2: #1e1e24;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #f0eff7;
+    --muted: #888897;
+    --accent: #7c6eee;
+    --accent2: #a78bfa;
+    --accent-glow: rgba(124, 110, 238, 0.18);
+    --green: #3ecf8e;
+    --coral: #f97066;
+    --amber: #f6ab40;
+    --mono: 'DM Mono', monospace;
+    --display: 'Syne', sans-serif;
+  }
 
-    <title>Natours | Exciting tours for adventurous people</title>
-  </head>
-  <body>
-    <div class="navigation">
-      <input type="checkbox" class="navigation__checkbox" id="navi-toggle" />
-      <label for="navi-toggle" class="navigation__button">
-        <span class="navigation__icon">&nbsp;</span>
-      </label>
-      <div class="navigation__background">&nbsp;</div>
-      <nav class="navigation__nav">
-        <ul class="navigation__list">
-          <li class="navigation__item">
-            <a href="#" class="navigation__link"><span>01</span>About Us</a>
-          </li>
-          <li class="navigation__item">
-            <a href="#" class="navigation__link"
-              ><span>02</span>Your Benifits</a
-            >
-          </li>
-          <li class="navigation__item">
-            <a href="#" class="navigation__link"><span>03</span>Popular Tour</a>
-          </li>
-          <li class="navigation__item">
-            <a href="#" class="navigation__link"><span>04</span>Stories</a>
-          </li>
-          <li class="navigation__item">
-            <a href="#" class="navigation__link"><span>05</span>Book Now</a>
-          </li>
-        </ul>
-      </nav>
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* grid lines background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1rem 0;
+    background: rgba(14,14,17,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav .inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  nav .logo {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  nav .logo span { color: var(--accent); }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav ul a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    padding: 7rem 0 5rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent-glow);
+    border: 1px solid rgba(124,110,238,0.3);
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 .dim { color: var(--muted); }
+  .hero h1 .accent { color: var(--accent); }
+
+  .hero-desc {
+    max-width: 440px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border2);
+  }
+
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-val {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-title h2 {
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* PROJECTS */
+  #projects { padding: 5rem 0; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .project-card {
+    background: var(--surface);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-decoration: none;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: transparent;
+    transition: background 0.2s;
+  }
+
+  .project-card:hover { background: var(--surface2); }
+
+  .project-card:hover::before { background: var(--accent); }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .card-arrow {
+    color: var(--muted);
+    font-size: 18px;
+    transition: all 0.2s;
+  }
+
+  .project-card:hover .card-arrow {
+    color: var(--accent2);
+    transform: translate(2px,-2px);
+  }
+
+  .card-title {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin-bottom: 2px;
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+
+  .card-lang {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .lang-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .card-stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    border: 1px solid;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .badge-purple { color: var(--accent2); border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.08); }
+  .badge-green { color: var(--green); border-color: rgba(62,207,142,0.3); background: rgba(62,207,142,0.08); }
+  .badge-coral { color: var(--coral); border-color: rgba(249,112,102,0.3); background: rgba(249,112,102,0.08); }
+  .badge-amber { color: var(--amber); border-color: rgba(246,171,64,0.3); background: rgba(246,171,64,0.08); }
+
+  /* ABOUT */
+  #about { padding: 5rem 0; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (max-width: 600px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.8rem; }
+    nav ul { display: none; }
+    .hero-stats { gap: 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+
+  .about-text p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 500; }
+
+  .skills-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .skill-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .skill-name {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  .skill-bar-bg {
+    flex: 1;
+    height: 3px;
+    background: var(--border2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent);
+    transform-origin: left;
+    animation: barFill 1.2s ease forwards;
+    transform: scaleX(0);
+  }
+
+  @keyframes barFill {
+    to { transform: scaleX(1); }
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 0;
+    margin-top: 4rem;
+  }
+
+  footer .inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  footer p {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  footer a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--accent2); }
+
+  /* ACHIEVEMENT CHIPS */
+  .achievements {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1rem;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .chip .chip-icon { font-size: 13px; }
+
+  /* ENTRANCE ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.35s; }
+  .delay-4 { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a class="logo" href="#">yook<span>00627</span></a>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://github.com/yook00627" target="_blank" rel="noopener">GitHub ↗</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <section class="hero">
+    <div class="hero-tag fade-up">Full-Stack · Game Dev · Open Source</div>
+
+    <h1 class="fade-up delay-1">
+      Kevin<br><span class="dim">Yook</span><span class="accent">.</span>
+    </h1>
+
+    <p class="hero-desc fade-up delay-2">
+      Software engineer based in <strong style="color:var(--text)">San Francisco</strong> building systems software, game engines, and interactive tools. Passionate about low-level programming and aspiring game developer.
+    </p>
+
+    <div class="hero-links fade-up delay-3">
+      <a class="btn btn-primary" href="https://github.com/yook00627" target="_blank" rel="noopener">View GitHub</a>
+      <a class="btn btn-ghost" href="https://twitter.com/yook00627" target="_blank" rel="noopener">@yook00627</a>
     </div>
 
-    <header class="header">
-      <div class="header__logo-box">
-        <img src="img/logo-white.png" alt="logo" class="header__logo" />
+    <div class="hero-stats fade-up delay-4">
+      <div>
+        <div class="stat-val">24</div>
+        <div class="stat-label">Public Repos</div>
       </div>
-      <div class="header__text-box">
-        <h1 class="heading-primary">
-          <span class="heading-primary--main">Outdoors</span>
-          <span class="heading-primary--sub">is where life happens</span>
-        </h1>
-        <a href="#section-tours" class="btn btn--white btn--animated"
-          >Discover our tours</a
-        >
+      <div>
+        <div class="stat-val">33</div>
+        <div class="stat-label">Followers</div>
       </div>
-    </header>
-
-    <main>
-      <section class="section-about">
-        <div class="u-center-text u-margin-bottom-big">
-          <h2 class="heading-secondary">
-            Exciting tours for adventurous people
-          </h2>
-        </div>
-        <div class="row">
-          <div class="col-1-of-2">
-            <h3 class="heading-tertiary u-margin-bottom-small">
-              You're going to love nature
-            </h3>
-            <p class="paragraph">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet
-              obcaecati in vero ut dolorem, iusto voluptates debitis accusamus
-              cum dolores natus labore necessitatibus doloremque ratione facere
-              impedit id ipsam. Eveniet.
-            </p>
-
-            <h3 class="heading-tertiary u-margin-bottom-small">
-              Live like an adventurer
-            </h3>
-            <p class="paragraph">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet
-              obcaecati in vero ut dolorem, iusto voluptates debitis accusamus
-              cum dolores natus labore necessitatibus doloremque ratione facere
-              impedit id ipsam. Eveniet.
-            </p>
-
-            <a href="#" class="btn-text">Learn More &rarr;</a>
-          </div>
-          <div class="col-1-of-2">
-            <div class="composition">
-              <img
-                src="img/nat-1-large.jpg"
-                alt="Photo 1"
-                class="composition__photo composition__photo--p1"
-              />
-              <img
-                src="img/nat-2-large.jpg"
-                alt="Photo 2"
-                class="composition__photo composition__photo--p2"
-              />
-              <img
-                src="img/nat-3-large.jpg"
-                alt="Photo 3"
-                class="composition__photo composition__photo--p3"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-features">
-        <div class="row">
-          <div class="col-1-of-4">
-            <div class="feature-box">
-              <i class="feature-box__icon icon-basic-world"></i>
-              <h3 class="heading-tertiary u-margin-bottom-small">
-                Explore the world
-              </h3>
-              <p class="feature-box__text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-          <div class="col-1-of-4">
-            <div class="feature-box">
-              <i class="feature-box__icon icon-basic-compass"></i>
-              <h3 class="heading-tertiary u-margin-bottom-small">
-                Meet nature
-              </h3>
-              <p class="feature-box__text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-          <div class="col-1-of-4">
-            <div class="feature-box">
-              <i class="feature-box__icon icon-basic-map"></i>
-              <h3 class="heading-tertiary u-margin-bottom-small">
-                Find your way
-              </h3>
-              <p class="feature-box__text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-          <div class="col-1-of-4">
-            <div class="feature-box">
-              <i class="feature-box__icon icon-basic-heart"></i>
-              <h3 class="heading-tertiary u-margin-bottom-small">
-                Live a healthier life
-              </h3>
-              <p class="feature-box__text">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section-tours" id="section-tours">
-        <div class="u-center-text u-margin-bottom-big">
-          <h2 class="heading-secondary">
-            Most Popular Tours
-          </h2>
-        </div>
-
-        <div class="row">
-          <div class="col-1-of-3">
-            <div class="card">
-              <div class="card__side card__side--front">
-                <div class="card__picture card__picture--1">
-                  &nbsp;
-                </div>
-                <h4 class="card__heading">
-                  <span class="card__heading-span card__heading-span--1">
-                    The sea explorer
-                  </span>
-                </h4>
-                <div class="card__details">
-                  <ul>
-                    <li>3 day tour</li>
-                    <li>Up to 30 people</li>
-                    <li>2 tour guides</li>
-                    <li>Sleeping 9 hours</li>
-                    <li>Easy tour</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="card__side card__side--back card__side--back-1">
-                <div class="card__cta">
-                  <div class="card__price-box">
-                    <p class="card__price-only">Only</p>
-                    <p class="card__price-value">$399</p>
-                  </div>
-                  <a href="#popup" class="btn btn--white">Book Now!</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-1-of-3">
-            <div class="card">
-              <div class="card__side card__side--front">
-                <div class="card__picture card__picture--2">
-                  &nbsp;
-                </div>
-                <h4 class="card__heading">
-                  <span class="card__heading-span card__heading-span--2">
-                    The sea explorer
-                  </span>
-                </h4>
-                <div class="card__details">
-                  <ul>
-                    <li>3 day tour</li>
-                    <li>Up to 30 people</li>
-                    <li>2 tour guides</li>
-                    <li>Sleeping 9 hours</li>
-                    <li>Easy tour</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="card__side card__side--back card__side--back-2">
-                <div class="card__cta">
-                  <div class="card__price-box">
-                    <p class="card__price-only">Only</p>
-                    <p class="card__price-value">$299</p>
-                  </div>
-                  <a href="#popup" class="btn btn--white">Book Now!</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-1-of-3">
-            <div class="card">
-              <div class="card__side card__side--front">
-                <div class="card__picture card__picture--3">
-                  &nbsp;
-                </div>
-                <h4 class="card__heading">
-                  <span class="card__heading-span card__heading-span--3">
-                    The sea explorer
-                  </span>
-                </h4>
-                <div class="card__details">
-                  <ul>
-                    <li>3 day tour</li>
-                    <li>Up to 30 people</li>
-                    <li>2 tour guides</li>
-                    <li>Sleeping 9 hours</li>
-                    <li>Easy tour</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="card__side card__side--back card__side--back-3">
-                <div class="card__cta">
-                  <div class="card__price-box">
-                    <p class="card__price-only">Only</p>
-                    <p class="card__price-value">$599</p>
-                  </div>
-                  <a href="#popup" class="btn btn--white">Book Now!</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="u-center-text u-margin-top-huge">
-          <a href="#" class="btn btn--green">Discover all tours</a>
-        </div>
-      </section>
-
-      <section class="section-stories">
-        <div class="bg-video">
-          <video class="bg-video__content" autoplay muted loop>
-            <source src="img/video.mp4" type="video/mp4" />
-            <source src="img/video.webm" type="video/webm" />
-            Your Browser is not supported
-          </video>
-        </div>
-
-        <div class="u-center-text u-margin-bottom-big">
-          <h2 class="heading-secondary">
-            We make people happy
-          </h2>
-        </div>
-        <div class="row">
-          <div class="story">
-            <figure class="story__shape">
-              <img
-                src="img/nat-8.jpg"
-                alt="Person on a tour"
-                class="story__img"
-              />
-              <figcaption class="story__caption">Jay Smith</figcaption>
-            </figure>
-            <div class="story__text">
-              <h3 class="heading-tertiary u-margin-bottom-small">
-                I had the best week ever!
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium odio enim architecto non? At, repellendus dolorum,
-                culpa fuga autem consectetur rerum enim atque natus, molestias
-                aliquam eum molestiae inventore debitis! Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="story">
-            <figure class="story__shape">
-              <img
-                src="img/nat-9.jpg"
-                alt="Person on a tour"
-                class="story__img"
-              />
-              <figcaption class="story__caption">John Smith</figcaption>
-            </figure>
-            <div class="story__text">
-              <h3 class="heading-tertiary u-margin-bottom-small">
-                This was the best thing that ever happened to me
-              </h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Accusantium odio enim architecto non? At, repellendus dolorum,
-                culpa fuga autem consectetur rerum enim atque natus, molestias
-                aliquam eum molestiae inventore debitis! Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="u-center-text u-margin-top-huge">
-          <a href="#" class="btn-text">Read all stories &rarr;</a>
-        </div>
-      </section>
-
-      <section class="section-book">
-        <div class="row">
-          <div class="book">
-            <div class="book__form">
-              <form action="#" class="form">
-                <div class="u-margin-bottom-medium">
-                  <h2 class="heading-secondary">
-                    Start booking now
-                  </h2>
-                </div>
-
-                <div class="form__group">
-                  <input
-                    type="text"
-                    class="form__input"
-                    placeholder="Full Name"
-                    id="name"
-                    required
-                  />
-                  <label for="name" class="form__label">Full Name</label>
-                </div>
-
-                <div class="form__group">
-                  <input
-                    type="email"
-                    class="form__input"
-                    placeholder="Email address"
-                    id="email"
-                    required
-                  />
-                  <label for="email" class="form__label">Email address</label>
-                </div>
-
-                <div class="form__group u-margin-bottom-medium">
-                  <div class="form__radio-group">
-                    <input
-                      type="radio"
-                      class="form__radio-input"
-                      id="small"
-                      name="size"
-                    />
-                    <label for="small" class="form__radio-label">
-                      <span class="form__radio-button"></span>
-                      Small tour group</label
-                    >
-                  </div>
-                  <div class="form__radio-group">
-                    <input
-                      type="radio"
-                      class="form__radio-input"
-                      id="large"
-                      name="size"
-                    />
-                    <label for="large" class="form__radio-label">
-                      <span class="form__radio-button"></span>
-                      Large tour group</label
-                    >
-                  </div>
-                </div>
-
-                <div class="form__group">
-                  <button class="btn btn--green">Next Step &rarr;</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="footer__logo-box">
-        <img src="img/logo-green-2x.png" alt="Full logo" class="footer__logo" />
+      <div>
+        <div class="stat-val">5★</div>
+        <div class="stat-label">Total Stars</div>
       </div>
-      <div class="row">
-        <div class="col-1-of-2">
-          <div class="footer__navigation">
-            <ul class="footer__list">
-              <li class="footer__item">
-                <a href="#" class="footer__link">Company</a>
-              </li>
-              <li class="footer__item">
-                <a href="#" class="footer__link">Contact us</a>
-              </li>
-              <li class="footer__item">
-                <a href="#" class="footer__link">Careers</a>
-              </li>
-              <li class="footer__item">
-                <a href="#" class="footer__link">Privacy policy</a>
-              </li>
-              <li class="footer__item">
-                <a href="#" class="footer__link">Terms</a>
-              </li>
-            </ul>
-          </div>
+      <div>
+        <div class="stat-val">SF</div>
+        <div class="stat-label">Location</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-title">
+      <h2>Featured Projects</h2>
+    </div>
+
+    <div class="projects-grid">
+
+      <a class="project-card" href="https://github.com/yook00627/simple_shell" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div class="card-icon" style="background:rgba(124,110,238,0.12);">🐚</div>
+          <span class="card-arrow">↗</span>
         </div>
-        <div class="col-1-of-2">
-          <p class="footer__copyright">
-            Built by <a href="#" class="footer__link">Kevin Yook</a> for online
-            course <a href="#" class="footer__link">Advance CSS course</a>.
-            Copyright &copy; by Jonas Schmedtman. You are allowed to use this
-            webpage for both personal use, but NOT to claim it as your own
-            design. A credit to the original author, Jonas Schmedtmann, is
-            highly appreciated.
-          </p>
+        <div>
+          <div class="card-title">simple_shell</div>
+          <p class="card-desc">A Unix shell built from scratch in C. Supports built-in commands (cd, env, exit, setenv), PATH resolution, interactive and non-interactive modes, and custom memory management.</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 4px;">
+          <span class="badge badge-purple">systems</span>
+          <span class="badge badge-purple">unix</span>
+          <span class="badge badge-purple">cli</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-lang"><span class="lang-dot" style="background:#555555;"></span>C</span>
+          <span class="card-stars">★ 2 &nbsp;·&nbsp; ⑂ 12</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/yook00627/Sesame-Engine" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div class="card-icon" style="background:rgba(62,207,142,0.10);">🎮</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <div class="card-title">Sesame Engine</div>
+          <p class="card-desc">A custom game engine project built in C++ with GLSL shaders and Lua scripting. Organized into engine core, playground, and scripts — a full-featured foundation for game development.</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 4px;">
+          <span class="badge badge-green">game dev</span>
+          <span class="badge badge-green">graphics</span>
+          <span class="badge badge-green">C++</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-lang"><span class="lang-dot" style="background:#f34b7d;"></span>C++</span>
+          <span class="card-stars">★ 3 &nbsp;·&nbsp; ⑂ 0</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/yook00627/simple_mud" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div class="card-icon" style="background:rgba(249,112,102,0.10);">🌐</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <div class="card-title">simple_mud</div>
+          <p class="card-desc">A multi-user dungeon (MUD) server written in PHP — a text-based online role-playing game engine. Classic server-side game logic and real-time player interaction.</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 4px;">
+          <span class="badge badge-coral">game</span>
+          <span class="badge badge-coral">multiplayer</span>
+          <span class="badge badge-coral">PHP</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-lang"><span class="lang-dot" style="background:#4F5D95;"></span>PHP</span>
+          <span class="card-stars">★ 0 &nbsp;·&nbsp; ⑂ 0</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/yook00627/useful_scripts" target="_blank" rel="noopener">
+        <div class="card-top">
+          <div class="card-icon" style="background:rgba(246,171,64,0.10);">⚡</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <div>
+          <div class="card-title">useful_scripts</div>
+          <p class="card-desc">A curated collection of shell scripts for everyday developer tasks — automation utilities, workflow helpers, and command-line productivity tools.</p>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom: 4px;">
+          <span class="badge badge-amber">devtools</span>
+          <span class="badge badge-amber">automation</span>
+          <span class="badge badge-amber">shell</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-lang"><span class="lang-dot" style="background:#89e051;"></span>Shell</span>
+          <span class="card-stars">★ 0 &nbsp;·&nbsp; ⑂ 0</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-title">
+      <h2>About</h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>full-stack software engineer</strong> and aspiring game developer based in San Francisco. I love working close to the metal — whether that's writing C systems code or building a game engine from scratch.
+        </p>
+        <p>
+          My work spans <strong>systems programming</strong>, <strong>game development</strong>, and <strong>web engineering</strong>. I enjoy projects that require deep technical understanding and clean architecture.
+        </p>
+        <p>
+          GitHub achievements: <strong>Arctic Code Vault Contributor</strong> and <strong>Pull Shark ×2</strong>.
+        </p>
+        <div class="achievements">
+          <span class="chip"><span class="chip-icon">🧊</span> Arctic Code Vault Contributor</span>
+          <span class="chip"><span class="chip-icon">🦈</span> Pull Shark ×2</span>
         </div>
       </div>
-    </footer>
 
-    <div class="popup" id="popup">
-      <div class="popup__content">
-        <div class="popup__left">
-          <img src="img/nat-8.jpg" alt="Tour photo" class="popup__img" />
-          <img src="img/nat-9.jpg" alt="Tour Photo" class="popup__img" />
+      <div class="skills-stack">
+        <div class="skill-row">
+          <span class="skill-name">C / C++</span>
+          <div class="skill-bar-bg">
+            <div class="skill-bar-fill" style="width:90%; animation-delay:0.6s; background:var(--accent);"></div>
+          </div>
         </div>
-        <div class="popup__right">
-          <a href="#section-tours" class="popup__close">&times;</a>
-          <h2 class="heading-secondary u-margin-bottom-small">
-            Start booking now
-          </h2>
-          <h3 class="heading-tertiary u-margin-bottom-small">
-            Important &ndash; Please read before booking
-          </h3>
-          <p class="popup__text">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque
-            impedit soluta libero enim in ex earum consectetur nam labore?
-            Ratione nulla ad error assumenda culpa aperiam neque excepturi,
-            deleniti beatae. Lorem, ipsum dolor sit amet consectetur adipisicing
-            elit. Consequatur odio dolorem harum atque explicabo possimus in
-            repudiandae vero, voluptates cum suscipit aperiam quibusdam nulla
-            illo eveniet consequuntur corrupti placeat molestias!
-          </p>
-          <a href="#" class="btn btn--green">Book Now</a>
+        <div class="skill-row">
+          <span class="skill-name">Shell</span>
+          <div class="skill-bar-bg">
+            <div class="skill-bar-fill" style="width:80%; animation-delay:0.7s; background:var(--green);"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">Game Dev</span>
+          <div class="skill-bar-bg">
+            <div class="skill-bar-fill" style="width:70%; animation-delay:0.8s; background:var(--coral);"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">PHP / Web</span>
+          <div class="skill-bar-bg">
+            <div class="skill-bar-fill" style="width:65%; animation-delay:0.9s; background:var(--amber);"></div>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-name">GLSL</span>
+          <div class="skill-bar-bg">
+            <div class="skill-bar-fill" style="width:50%; animation-delay:1s; background:var(--accent2);"></div>
+          </div>
         </div>
       </div>
     </div>
-  </body>
-  <!--
-    <section class="grid-test">
-      <div class="row">
-        <div class="col-1-of-2">
-          Col 1 of 2
-        </div>
-        <div class="col-1-of-2">
-          Col 1 of 2
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-1-of-3">
-          Col 1 of 3
-        </div>
-        <div class="col-1-of-3">
-          Col 1 of 3
-        </div>
-        <div class="col-1-of-3">
-          Col 1 of 3
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-1-of-3">
-          Col 1 of 3
-        </div>
-        <div class="col-2-of-3">
-          Col 2 of 3
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-1-of-4">
-          Col 1 of 4
-        </div>
-        <div class="col-1-of-4">
-          Col 1 of 4
-        </div>
-        <div class="col-1-of-4">
-          Col 1 of 4
-        </div>
-        <div class="col-1-of-4">
-          Col 1 of 4
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-1-of-4">
-          Col 1 of 4
-        </div>
-        <div class="col-1-of-4">
-          Col 1 of 4
-        </div>
-        <div class="col-2-of-4">
-          Col 2 of 4
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-1-of-4">
-          Col 1 of 4
-        </div>
-        <div class="col-3-of-4">
-          Col 2 of 4
-        </div>
-      </div>
-    </section>
-  -->
+  </section>
+</div>
+
+<footer>
+  <div class="inner">
+    <p>© 2026 Kevin Yook · yook00627</p>
+    <div style="display:flex;gap:1.5rem;">
+      <a href="https://github.com/yook00627" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com/yook00627" target="_blank" rel="noopener">Twitter</a>
+    </div>
+  </div>
+</footer>
+
+</body>
 </html>
